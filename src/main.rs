@@ -44,3 +44,50 @@ fn main() {
         Err(e) => println!("Error: {}", e)
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*; // importe la struct et les implémentations dans le module de tests
+
+    fn setup() -> Car {
+        Car::new(
+            String::from("Fiat"),
+            String::from("Multipla"),
+            1998
+        )
+    }
+
+    #[test]
+    fn test_car_age() {
+        let car = setup();
+
+        // test pour une année valide → plus de 10 ans
+        assert_eq!(car.car_age(2024), Ok(26));
+        // test pour une année valide → moins de 10 ans
+        assert_eq!(car.car_age(2000), Ok(2));
+        // test pour une année valide → moins de 10 ans > année construction
+        assert_eq!(car.car_age(1998), Ok(0));
+        // test pour une année invalide
+        assert_eq!(
+            car.car_age(1900),
+            Err(String::from("Current year cannot be less than the car's year of manufacture."))
+        );
+    }
+
+    #[test]
+    fn test_is_classic() {
+        let car = setup();
+        
+        // test pour une année valide → plus de 10 ans
+        assert_eq!(car.is_classic(2024), Ok(true));
+        // test pour une année valide → moins de 10 ans
+        assert_eq!(car.is_classic(2000), Ok(false));
+        // test pour une année valide → moins de 10 ans > année construction
+        assert_eq!(car.is_classic(1998), Ok(false));
+        // test pour une année invalide
+        assert_eq!(
+            car.is_classic(1900),
+            Err(String::from("Current year cannot be less than the car's year of manufacture."))
+        );
+    }
+}
