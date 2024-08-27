@@ -21,12 +21,9 @@ impl Car {
         }
     }
 
-    fn is_classic(&self, current_year: u32) -> Option<&Self> {
-        if self.car_age(current_year) > 10 {
-            Some(self)
-        } else {
-            None
-        }
+    fn is_classic(&self, current_year: u32) -> Result<bool, String> {
+        let age = self.car_age(current_year)?;
+        Ok(age > 10)
     }
 }
 
@@ -42,7 +39,8 @@ fn main() {
     println!("{}", my_car.describe());
 
     match my_car.is_classic(current_year) {
-        Some(car) => println!("The {} is a classic!", car.model),
-        None => println!("This car is not a classic.")
+        Ok(true) => println!("The {} is a classic!", my_car.model),
+        Ok(false) => println!("This car is not a classic."),
+        Err(e) => println!("Error: {}", e)
     }
 }
