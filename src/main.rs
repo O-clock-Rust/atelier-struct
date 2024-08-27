@@ -36,4 +36,9 @@ fn main() {
         1998
     );
     println!("{}", my_car.describe());
+
+    match my_car.is_classic(current_year) {
+        Some(car) => println!("The {} is a classic!", car.model),
+        None => println!("This car is not a classic.")
+    }
 }
