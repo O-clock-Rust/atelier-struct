@@ -13,8 +13,12 @@ impl Car {
         format!("In {}, {} created the {}", self.year, self.brand, self.model)
     }
 
-    fn car_age(&self, current_year: u32) -> u32 {
-        current_year - self.year
+    fn car_age(&self, current_year: u32) -> Result<u32, String> {
+        if current_year < self.year {
+            Err(String::from("Current year cannot be less than the car's year of manufacture."))
+        } else {
+            Ok(current_year - self.year)
+        }
     }
 
     fn is_classic(&self, current_year: u32) -> Option<&Self> {
