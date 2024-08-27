@@ -12,6 +12,10 @@ impl Car {
     fn describe(&self) -> String {
         format!("In {}, {} created the {}", self.year, self.brand, self.model)
     }
+
+    fn car_age(&self, current_year: u32) -> u32 {
+        current_year - self.year
+    }
 }
 
 fn main() {
