@@ -21,4 +21,11 @@ impl Car {
 fn main() {
     let current_year: u32 = 2024;
     println!("This year is {}", current_year);
+
+    let my_car = Car::new(
+        String::from("Fiat"),
+        String::from("Multipla"),
+        1998
+    );
+    println!("{}", my_car.describe());
 }
