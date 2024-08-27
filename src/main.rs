@@ -16,6 +16,14 @@ impl Car {
     fn car_age(&self, current_year: u32) -> u32 {
         current_year - self.year
     }
+
+    fn is_classic(&self, current_year: u32) -> Option<&Self> {
+        if self.car_age(current_year) > 10 {
+            Some(self)
+        } else {
+            None
+        }
+    }
 }
 
 fn main() {
